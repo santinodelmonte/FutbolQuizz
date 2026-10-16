@@ -622,7 +622,7 @@
   /* ================= CÓMO JUGAMOS ================= */
   function screenComo() {
     view.innerHTML = head('Cómo jugamos') +
-      '<p class="screen-sub">El 1-4-1-3-2 es, en la práctica, un 4-4-2 en rombo. Ocho ideas para tener claras.</p>' +
+      '<p class="screen-sub">El 1-4-1-3-2: cuatro defensores, el 5, una línea de tres volantes y dos delanteros. Ocho ideas para tener claras.</p>' +
       D.comoJugamos.map(function (c, i) {
         return '<div class="card idea' + (c.alerta ? ' warn' : '') + '"><span class="num">' + (i + 1) + '</span><div><h3>' + esc(c.titulo) + '</h3>' +
           '<ul>' + c.lineas.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul></div></div>';

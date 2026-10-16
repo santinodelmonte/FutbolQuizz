@@ -37,7 +37,7 @@ window.CAI_DATA = {
     { id: '5', nombre: 'Volante central (pivote)', nota: 'Equilibrio. Protege la zona delante de los zagueros y da la salida por dentro.' },
     { id: 'VD', nombre: 'Volante derecho', nota: 'Interior: cubre al lateral, salta a presionar al lateral rival, llega al área.' },
     { id: 'VI', nombre: 'Volante izquierdo', nota: 'Interior: cubre al lateral, salta a presionar al lateral rival, llega al área.' },
-    { id: 'ENG', nombre: 'Enganche', nota: 'Juega entre líneas detrás de los delanteros; en presión salta a los centrales.' },
+    { id: 'ENG', nombre: 'Enganche', nota: 'Volante interno: va en el centro de la línea de tres con VI y VD (se llama enganche, pero es un volante más). En presión salta a los centrales.' },
     { id: 'DD', nombre: 'Delantero derecho', nota: 'Fija a un central rival, ataca el espacio, cierra el pase al lateral en presión alta.' },
     { id: 'DI', nombre: 'Delantero izquierdo', nota: 'Fija a un central rival, ataca el espacio, cierra el pase al lateral en presión alta.' }
   ],
@@ -50,10 +50,10 @@ window.CAI_DATA = {
       id: 'f1',
       nombre: 'Posición base',
       subtitulo: 'Bloque medio, sin pelota en juego',
-      texto: 'Así nos paramos de base: cuatro atrás, el 5 adelante de los zagueros, los dos volantes por dentro, el enganche detrás de los dos delanteros.',
+      texto: 'Así nos paramos de base: cuatro atrás, el 5 adelante de los zagueros, una línea de tres volantes (VI, ENG y VD) y los dos delanteros.',
       pasos: [
         {
-          titulo: 'El rombo armado',
+          titulo: 'El 1-4-1-3-2 armado',
           pelota: null,
           propios: {
             ARQ: [50, 4], LD: [85, 26], ZD: [62, 20], ZI: [38, 20], LI: [15, 26],
@@ -79,7 +79,7 @@ window.CAI_DATA = {
           si: [{ si: 'la pelota va a mi banda', hago: 'Salto a presionar al lateral rival; el LD me cubre la espalda.' }] },
         VI: { propuesta: true, hago: 'Me paro por dentro, entre el LI y el 5. Cubro el espacio que deja el lateral cuando sube.',
           si: [{ si: 'la pelota va a mi banda', hago: 'Salto a presionar al lateral rival; el LI me cubre la espalda.' }] },
-        ENG: { propuesta: true, hago: 'Me paro detrás de los delanteros, entre líneas. Uno el medio con los de arriba.',
+        ENG: { propuesta: true, hago: 'Me paro en el centro de la línea de tres volantes, entre el VI y el VD. Soy un volante interno más.',
           si: [{ si: 'el rival sale jugando desde atrás', hago: 'Salto al zaguero con pelota, de adentro hacia afuera.' }] },
         DD: { propuesta: true, hago: 'Me paro arriba, cerca del DI. Fijo a un central rival y tapo el pase al medio.',
           si: [{ si: 'la pelota va al lateral rival de mi lado', hago: 'Me cierro para que no la devuelva por dentro; sale el VD.' }] },
@@ -152,8 +152,8 @@ window.CAI_DATA = {
           si: [{ si: 'me toman de espaldas', hago: 'No giro forzado: juego de primera al LD o de vuelta al ZD.' }] },
         VI: { propuesta: true, hago: 'Me quedo por dentro a la izquierda, atento a cubrir si perdemos.',
           si: [{ si: 'la salida cambia a la izquierda', hago: 'Bajo yo a ofrecerme, como hizo el VD, y sube el LI.' }] },
-        ENG: { propuesta: true, hago: 'Me muevo entre líneas, detrás de los volantes rivales, para recibir el segundo pase.',
-          si: [{ si: 'el VD gira con pelota', hago: 'Me ofrezco de frente entre líneas para atacar rápido.' }] },
+        ENG: { propuesta: true, hago: 'Me muevo por dentro, en la línea de volantes, para recibir el segundo pase.',
+          si: [{ si: 'el VD gira con pelota', hago: 'Me ofrezco de frente por dentro para atacar rápido.' }] },
         DD: { propuesta: true, hago: 'Me quedo arriba fijando a un central rival, para que no salga a presionar.',
           si: [{ si: 'el VD gira y conduce', hago: 'Ataco el espacio entre central y lateral rival.' }] },
         DI: { propuesta: true, hago: 'Me quedo arriba fijando al otro central rival y estiro su defensa.',
@@ -219,7 +219,7 @@ window.CAI_DATA = {
           si: [{ si: 'el LD no puede subir', hago: 'Me abro yo para dar amplitud.' }] },
         VI: { propuesta: true, hago: 'Soy el volante contrario: llego a la medialuna para el rebote o el pase atrás.',
           si: [{ si: 'la pelota vuelve atrás', hago: 'Me ofrezco para cambiar de frente.' }] },
-        ENG: { propuesta: true, hago: 'Llego al borde del área, entre líneas, listo para el pase atrás.',
+        ENG: { propuesta: true, hago: 'Como volante interno, llego al borde del área listo para el pase atrás.',
           si: [{ si: 'rechazan el centro', hago: 'Ataco el rebote o presiono ahí mismo.' }] },
         DD: { propuesta: true, hago: 'Ataco el primer palo.',
           si: [{ si: 'el LD tira el centro atrás', hago: 'Freno y me ofrezco entre los centrales.' }] },
@@ -421,10 +421,10 @@ window.CAI_DATA = {
       id: 'f7',
       nombre: 'Bloque bajo',
       subtitulo: 'Dos líneas de cuatro',
-      texto: 'Cuando nos meten atrás, el rombo se hace dos líneas de cuatro bien juntas. El enganche baja a la línea del 5.',
+      texto: 'Cuando nos meten atrás, la línea de tres volantes baja a la altura del 5 y quedan dos líneas de cuatro bien juntas.',
       pasos: [
         {
-          titulo: 'El rombo se aplana',
+          titulo: 'Dos líneas de cuatro',
           pelota: [50, 40],
           propios: {
             LD: [80, 14], ZD: [60, 14], ZI: [40, 14], LI: [20, 14], ARQ: [50, 3],
@@ -455,7 +455,7 @@ window.CAI_DATA = {
           si: [{ si: 'la pelota va a mi banda', hago: 'Salgo al lateral rival y el LD me cubre.' }] },
         VI: { propuesta: true, hago: 'Hago línea de cuatro con el 5, el ENG y el VD, delante de los defensores.',
           si: [{ si: 'la pelota va a mi banda', hago: 'Salgo al lateral rival y el LI me cubre.' }] },
-        ENG: { propuesta: true, hago: 'Bajo a la línea del 5. Somos cuatro en el medio.',
+        ENG: { propuesta: true, hago: 'Bajo con el VI y el VD a la línea del 5. Somos cuatro en el medio.',
           si: [{ si: 'la recuperamos', hago: 'Soy el primero en salir: busco al DD o al DI.' }] },
         DD: { propuesta: true, hago: 'Me quedo a la altura de la pelota y tapo el pase al medio.',
           si: [{ si: 'la recuperamos', hago: 'Me abro para recibir y salir rápido.' }] },
@@ -488,7 +488,7 @@ window.CAI_DATA = {
       consigna: 'Tenés la pelota por dentro y el rival está metido atrás. ¿A dónde pasás?',
       base: { fase: 'f3', paso: 1 },
       ideal: { x: 92, y: 72, rx: 6, ry: 8, nombre: 'LD que pasa por afuera' },
-      aceptable: { x: 52, y: 72, rx: 6, ry: 5, nombre: 'ENG entre líneas' },
+      aceptable: { x: 52, y: 72, rx: 6, ry: 5, nombre: 'ENG por dentro' },
       explicacion: 'Sin extremos, la amplitud la da el lateral: abrirle es estirar al rival.'
     },
     {
@@ -565,7 +565,8 @@ window.CAI_DATA = {
    * ------------------------------------------------------------------ */
   comoJugamos: [
     { titulo: 'Somos muchos por dentro', lineas: [
-      'Jugamos con un rombo en el medio: el 5, dos volantes y el enganche.',
+      'Jugamos con el 5 y, adelante, una línea de tres volantes: VI, ENG y VD.',
+      'El ENG se llama enganche, pero es un volante interno más.',
       'Por dentro somos más que el rival.',
       'No tenemos extremos.',
       'El ancho lo dan los laterales.',
@@ -594,7 +595,7 @@ window.CAI_DATA = {
       'Si cambian de frente, nos corremos por el medio y sale el otro volante.'
     ] },
     { titulo: 'Bloque bajo', lineas: [
-      'El rombo se aplana: dos líneas de cuatro.',
+      'Los tres volantes bajan a la altura del 5: dos líneas de cuatro.',
       'Bien juntos, sin espacios entre las líneas.',
       'Los delanteros tapan el pase al medio.'
     ] },
