@@ -37,7 +37,7 @@ window.CAI_DATA = {
     { id: '5', nombre: 'Volante central (pivote)', nota: 'Equilibrio. Protege la zona delante de los zagueros y da la salida por dentro.' },
     { id: 'VD', nombre: 'Volante derecho', nota: 'Interior: cubre al lateral, salta a presionar al lateral rival, llega al área.' },
     { id: 'VI', nombre: 'Volante izquierdo', nota: 'Interior: cubre al lateral, salta a presionar al lateral rival, llega al área.' },
-    { id: 'ENG', nombre: 'Enganche', nota: 'Volante interno: va en el centro de la línea de tres con VI y VD (se llama enganche, pero es un volante más). En presión salta a los centrales.' },
+    { id: 'ENG', nombre: 'Enganche (volante interno)', nota: 'Volante interno: va en el centro de la línea de tres con VI y VD (se llama enganche, pero es un volante más). En presión alta sube al pivote rival.' },
     { id: 'DD', nombre: 'Delantero derecho', nota: 'Fija a un central rival, ataca el espacio, cierra el pase al lateral en presión alta.' },
     { id: 'DI', nombre: 'Delantero izquierdo', nota: 'Fija a un central rival, ataca el espacio, cierra el pase al lateral en presión alta.' }
   ],
@@ -57,7 +57,7 @@ window.CAI_DATA = {
           pelota: null,
           propios: {
             ARQ: [50, 4], LD: [85, 26], ZD: [62, 20], ZI: [38, 20], LI: [15, 26],
-            '5': [50, 33], VD: [72, 44], VI: [28, 44], ENG: [50, 54], DD: [60, 64], DI: [40, 64]
+            '5': [50, 33], VD: [72, 44], VI: [28, 44], ENG: [50, 44], DD: [60, 64], DI: [40, 64]
           },
           rivales: []
         }
@@ -73,14 +73,14 @@ window.CAI_DATA = {
           si: [{ si: 'el LI queda arriba', hago: 'Me abro un poco para cubrir su espalda y aviso al 5 para que se acerque.' }] },
         LI: { propuesta: true, hago: 'Me paro abierto, un poco más arriba que los zagueros. Soy el ancho del equipo por izquierda.',
           si: [{ si: 'sube el LD', hago: 'No subo: me cierro con los zagueros y quedamos tres atrás.' }] },
-        '5': { propuesta: true, hago: 'Me paro delante de los zagueros, en el medio. Soy el equilibrio: no me voy lejos de mi zona.',
-          si: [{ si: 'un volante sale a presionar', hago: 'Me corro para su lado y tapo el pase por dentro.' }] },
+        '5': { propuesta: true, hago: 'Me paro solo delante de los zagueros, detrás de la línea de tres. Soy el equilibrio: no me voy lejos de mi zona.',
+          si: [{ si: 'un volante sale a presionar', hago: 'Me corro un poco para su lado y protejo delante de los zagueros; el ENG tapa el pase por dentro.' }] },
         VD: { propuesta: true, hago: 'Me paro por dentro, entre el LD y el 5. Cubro el espacio que deja el lateral cuando sube.',
           si: [{ si: 'la pelota va a mi banda', hago: 'Salto a presionar al lateral rival; el LD me cubre la espalda.' }] },
         VI: { propuesta: true, hago: 'Me paro por dentro, entre el LI y el 5. Cubro el espacio que deja el lateral cuando sube.',
           si: [{ si: 'la pelota va a mi banda', hago: 'Salto a presionar al lateral rival; el LI me cubre la espalda.' }] },
         ENG: { propuesta: true, hago: 'Me paro en el centro de la línea de tres volantes, entre el VI y el VD. Soy un volante interno más.',
-          si: [{ si: 'el rival sale jugando desde atrás', hago: 'Salto al zaguero con pelota, de adentro hacia afuera.' }] },
+          si: [{ si: 'un volante sale a presionar al lateral', hago: 'Me corro hacia su lado y ocupo su carril de adentro; el volante del otro lado se cierra.' }] },
         DD: { propuesta: true, hago: 'Me paro arriba, cerca del DI. Fijo a un central rival y tapo el pase al medio.',
           si: [{ si: 'la pelota va al lateral rival de mi lado', hago: 'Me cierro para que no la devuelva por dentro; sale el VD.' }] },
         DI: { propuesta: true, hago: 'Me paro arriba, cerca del DD. Fijo a un central rival y tapo el pase al medio.',
@@ -93,14 +93,14 @@ window.CAI_DATA = {
       id: 'f2',
       nombre: 'Salida desde el arco',
       subtitulo: 'Rival presionando con 2 delanteros y un enganche',
-      texto: 'Los zagueros se abren, el 5 se ofrece entre los dos delanteros rivales. Si nos tapan el medio, salimos por el lateral y el volante del lado baja a ayudar. El otro lateral no sube.',
+      texto: 'Los zagueros se abren, el 5 se ofrece entre los dos delanteros rivales. Si nos tapan el medio, salimos por el lateral y el volante del lado baja a ayudar. El ENG se corre hacia ese lado, en la línea de volantes, para el segundo pase. El otro lateral no sube.',
       pasos: [
         {
           titulo: 'Saque del arquero',
           pelota: 'ARQ',
           propios: {
             ARQ: [50, 5], ZD: [76, 12], ZI: [24, 12], LD: [92, 34], LI: [8, 34],
-            '5': [50, 22], VD: [70, 36], VI: [30, 36], ENG: [50, 50], DD: [62, 70], DI: [38, 70]
+            '5': [50, 22], VD: [70, 36], VI: [30, 36], ENG: [50, 40], DD: [62, 70], DI: [38, 70]
           },
           rivales: [
             [58, 20], [42, 20], [50, 32],
@@ -111,7 +111,7 @@ window.CAI_DATA = {
         {
           titulo: 'Pase al ZD: el LD sube un poco y el VD baja a ofrecerse',
           pelota: 'ZD',
-          propios: { LD: [92, 42], VD: [74, 30], '5': [56, 24], ENG: [56, 48] },
+          propios: { LD: [92, 42], VD: [74, 30], '5': [56, 24], ENG: [56, 40] },
           // El delantero rival de ese lado sale al ZD; el resto bascula 4 hacia la derecha (el arquero rival no se mueve).
           // Ajuste: el rival que quedaba en [62, 68] se subió a [62, 66] para no taparlo al DD.
           rivales: [
@@ -127,7 +127,7 @@ window.CAI_DATA = {
         {
           titulo: 'El ZD juega al VD por dentro; el VD gira y conduce',
           pelota: 'VD',
-          propios: { VD: [70, 40], LD: [92, 52], ENG: [60, 56], DD: [66, 72], DI: [44, 72], LI: [14, 30] },
+          propios: { VD: [70, 40], LD: [92, 52], ENG: [58, 48], DD: [66, 72], DI: [44, 72], LI: [14, 30] },
           flechas: [
             { tipo: 'pase', de: 'ZD', a: [74, 34] },
             { tipo: 'mov', de: [74, 34], a: 'VD' },
@@ -152,7 +152,7 @@ window.CAI_DATA = {
           si: [{ si: 'me toman de espaldas', hago: 'No giro forzado: juego de primera al LD o de vuelta al ZD.' }] },
         VI: { propuesta: true, hago: 'Me quedo por dentro a la izquierda, atento a cubrir si perdemos.',
           si: [{ si: 'la salida cambia a la izquierda', hago: 'Bajo yo a ofrecerme, como hizo el VD, y sube el LI.' }] },
-        ENG: { propuesta: true, hago: 'Me muevo por dentro, en la línea de volantes, para recibir el segundo pase.',
+        ENG: { propuesta: true, hago: 'Me corro hacia el lado de la salida, en la línea de volantes, para recibir el segundo pase.',
           si: [{ si: 'el VD gira con pelota', hago: 'Me ofrezco de frente por dentro para atacar rápido.' }] },
         DD: { propuesta: true, hago: 'Me quedo arriba fijando a un central rival, para que no salga a presionar.',
           si: [{ si: 'el VD gira y conduce', hago: 'Ataco el espacio entre central y lateral rival.' }] },
@@ -166,14 +166,14 @@ window.CAI_DATA = {
       id: 'f3',
       nombre: 'Ataque organizado por la derecha',
       subtitulo: 'Un lateral sube, el otro cierra',
-      texto: 'Sube un lateral y el otro se mete con los zagueros: siempre quedan 3 + el 5 atrás. Al área llegan los dos delanteros, el enganche y el volante contrario.',
+      texto: 'Sube un lateral y el otro se mete con los zagueros: siempre quedan 3 + el 5 atrás. Al área llegan los dos delanteros, el ENG y el volante contrario.',
       pasos: [
         {
           titulo: 'La tiene el VD, el LD pasa por afuera',
           pelota: 'VD',
           propios: {
             ARQ: [50, 14], ZD: [64, 34], ZI: [38, 32], LI: [22, 40], '5': [50, 44], LD: [92, 66],
-            VD: [70, 58], VI: [36, 60], ENG: [52, 72], DD: [62, 82], DI: [42, 82]
+            VD: [70, 58], VI: [36, 60], ENG: [51, 64], DD: [62, 82], DI: [42, 82]
           },
           rivales: [
             [70, 88], [56, 90], [44, 90], [30, 88],
@@ -197,7 +197,8 @@ window.CAI_DATA = {
             { tipo: 'pase', de: [70, 58], a: 'LD' },
             { tipo: 'mov', de: [62, 82], a: 'DD' },
             { tipo: 'mov', de: [42, 82], a: 'DI' },
-            { tipo: 'mov', de: [36, 60], a: 'VI' }
+            { tipo: 'mov', de: [36, 60], a: 'VI' },
+            { tipo: 'mov', de: [51, 64], a: 'ENG' }
           ]
         }
       ],
@@ -233,14 +234,14 @@ window.CAI_DATA = {
       id: 'f4',
       nombre: 'Bloque medio y basculación',
       subtitulo: 'Pelota del rival en nuestra banda izquierda',
-      texto: 'Pelota en una banda: todo el equipo se corre para ese lado. Sale el volante, el lateral cubre la espalda, el 5 cierra adentro y el lateral del otro lado se cierra. Lejos de la pelota no hay nada que defender.',
+      texto: 'Pelota en una banda: todo el equipo se corre para ese lado. Sale el volante de esa banda, el lateral le cubre la espalda y el ENG ocupa su carril de adentro. El otro volante se cierra, el 5 protege delante de los zagueros y el lateral del otro lado se cierra. Lejos de la pelota no hay nada que defender.',
       pasos: [
         {
           titulo: 'Bloque medio armado',
           pelota: [18, 56],
           propios: {
             ARQ: [50, 6], LI: [14, 30], ZI: [34, 24], ZD: [56, 24], LD: [76, 28], '5': [42, 36],
-            VI: [22, 48], VD: [60, 44], ENG: [44, 54], DI: [32, 62], DD: [54, 62]
+            VI: [22, 48], VD: [60, 46], ENG: [40, 48], DI: [32, 62], DD: [54, 62]
           },
           rivales: [
             [18, 56], [30, 70], [50, 74], [66, 62], [40, 52], [60, 50], [82, 56], [38, 40], [56, 38], [46, 30],
@@ -251,13 +252,14 @@ window.CAI_DATA = {
           titulo: 'Salta el VI al lateral, todo el bloque se corre',
           pelota: [18, 56],
           propios: {
-            VI: [20, 53], LI: [14, 40], '5': [34, 40], ENG: [40, 58], DI: [28, 66],
-            VD: [52, 44], LD: [68, 28], ZD: [50, 24], ZI: [30, 26]
+            VI: [20, 53], LI: [14, 40], '5': [40, 36], ENG: [32, 50], DI: [28, 66],
+            VD: [50, 46], LD: [68, 28], ZD: [50, 24], ZI: [30, 26]
           },
           flechas: [
             { tipo: 'mov', de: [22, 48], a: 'VI' },
             { tipo: 'mov', de: [14, 30], a: 'LI' },
-            { tipo: 'mov', de: [42, 36], a: '5' },
+            { tipo: 'mov', de: [40, 48], a: 'ENG' },
+            { tipo: 'mov', de: [60, 46], a: 'VD' },
             { tipo: 'mov', de: [76, 28], a: 'LD' }
           ]
         }
@@ -273,14 +275,15 @@ window.CAI_DATA = {
           si: [{ si: 'atacan la espalda del LI', hago: 'Salgo a cubrir y el ZD se cierra al medio.' }] },
         LI: { propuesta: true, hago: 'Cubro la espalda del VI que sale a presionar. No subo.',
           si: [{ si: 'el lateral rival supera al VI', hago: 'Le salgo yo y el ZI me cubre.' }] },
-        '5': { propuesta: true, hago: 'Me corro hacia la pelota y tapo el pase por dentro.',
-          si: [{ si: 'cambian de frente', hago: 'Me corro por el medio hacia el otro lado, con todo el bloque.' }] },
-        VD: { propuesta: true, hago: 'Me cierro hacia el medio, cerca del 5.',
+        '5': { propuesta: true, hago: 'Me corro un poco hacia la pelota y protejo delante de los zagueros, a la espalda del ENG y del VI.',
+          si: [{ si: 'un rival recibe a la espalda de los volantes', hago: 'Salgo a presionarlo sin dejarlo girar; los zagueros cierran atrás.' },
+               { si: 'cambian de frente', hago: 'Me corro por el medio hacia el otro lado, con todo el bloque.' }] },
+        VD: { propuesta: true, hago: 'Me cierro hacia el medio: la línea de tres se corre junta.',
           si: [{ si: 'cambian de frente a mi lado', hago: 'Salto yo al lateral rival y el VI vuelve a su lugar.' }] },
         VI: { propuesta: true, hago: 'Salto a presionar al lateral rival, de afuera hacia adentro.',
           si: [{ si: 'me supera', hago: 'No lo sigo: me doy vuelta y recupero mi lugar; me cubre el LI.' }] },
-        ENG: { propuesta: true, hago: 'Me corro con la pelota y me paro cerca del 5 para cerrar el medio.',
-          si: [{ si: 'juegan atrás al central', hago: 'Salto a presionarlo desde adentro.' }] },
+        ENG: { propuesta: true, hago: 'Me corro hacia la pelota y ocupo el carril de adentro que deja el VI: tapo el pase por dentro.',
+          si: [{ si: 'cambian de frente', hago: 'Me corro con la línea por el medio; sale el VD y yo cubro su carril de adentro.' }] },
         DD: { propuesta: true, hago: 'Me cierro al medio y tapo el pase al pivote rival.',
           si: [{ si: 'cambian de frente', hago: 'Me corro con el bloque y el DI se cierra.' }] },
         DI: { propuesta: true, hago: 'Cierro el pase atrás del lateral hacia su central.',
@@ -293,13 +296,15 @@ window.CAI_DATA = {
       id: 'f5',
       nombre: 'Presión alta',
       subtitulo: 'En el saque del arquero rival',
-      texto: 'Los delanteros se abren y cierran el pase a los laterales. El enganche sale al zaguero desde adentro hacia afuera, para que no pueda cambiar de lado. Si la pelota llega igual al lateral, salta el volante de ese lado.',
+      // Revisado: con el ENG en la línea de volantes, al zaguero rival lo presiona el delantero de ese lado
+      // (está a unos 8 m); el ENG queda a unos 20 m y no llega. El ENG sube al pivote rival.
+      texto: 'Los delanteros esperan abiertos, en la línea del pase a los laterales. Cuando el arquero juega a un zaguero, el delantero de ese lado lo presiona en curva, de afuera hacia adentro: con la espalda le tapa el pase al lateral. El otro delantero cierra el pase al otro zaguero y el ENG sube al pivote rival. Si la pelota llega igual al lateral, salta el volante de ese lado.',
       pasos: [
         {
           titulo: 'Saque del arquero rival',
           pelota: [50, 96],
           propios: {
-            DD: [66, 82], DI: [34, 82], ENG: [50, 82], VD: [70, 68], VI: [30, 68], '5': [50, 60],
+            DD: [66, 82], DI: [34, 82], VD: [70, 68], ENG: [50, 70], VI: [30, 68], '5': [50, 60],
             LD: [82, 52], LI: [18, 52], ZD: [60, 44], ZI: [40, 44], ARQ: [50, 22]
           },
           rivales: [
@@ -309,16 +314,18 @@ window.CAI_DATA = {
           ]
         },
         {
-          titulo: 'Juega al zaguero izquierdo rival: el ENG salta en curva',
+          titulo: 'Juega al zaguero izquierdo rival: el DI lo presiona en curva',
           pelota: [36, 90],
           propios: {
-            ENG: [40, 88], DI: [24, 84], DD: [52, 86], VI: [18, 76], '5': [44, 70],
-            VD: [58, 70], LI: [14, 62], LD: [74, 54], ZI: [38, 48], ZD: [58, 48]
+            DI: [33, 87], DD: [54, 86], ENG: [45, 82], VI: [20, 76], '5': [46, 68],
+            VD: [60, 72], LI: [16, 62], LD: [74, 54], ZI: [38, 50], ZD: [58, 50], ARQ: [50, 26]
           },
           flechas: [
             { tipo: 'pase', de: [50, 96], a: [36, 90] },
-            { tipo: 'mov', de: [50, 82], a: 'ENG', curva: [49, 90] },
-            { tipo: 'mov', de: [34, 82], a: 'DI' }
+            { tipo: 'mov', de: [34, 82], a: 'DI', curva: [27, 86] },
+            { tipo: 'mov', de: [66, 82], a: 'DD' },
+            { tipo: 'mov', de: [50, 70], a: 'ENG' },
+            { tipo: 'mov', de: [30, 68], a: 'VI' }
           ]
         }
       ],
@@ -333,18 +340,20 @@ window.CAI_DATA = {
           si: [{ si: 'le pegan largo', hago: 'Corro hacia atrás de frente a la pelota; el arquero me cubre.' }] },
         LI: { propuesta: true, hago: 'Subo para acortar y tomo la referencia del atacante rival de mi lado.',
           si: [{ si: 'salta el VI al lateral', hago: 'Subo un poco más para cubrir su espalda.' }] },
-        '5': { propuesta: true, hago: 'Me paro detrás del ENG. Cuando él salta, tomo al pivote rival.',
-          si: [{ si: 'el pivote rival recibe', hago: 'Lo presiono de atrás, sin dejarlo girar.' }] },
-        VD: { propuesta: true, hago: 'Me paro alto, listo para saltar sobre el lateral rival de mi lado.',
+        '5': { propuesta: true, hago: 'Me paro detrás de la línea de tres. Cuando sube el ENG, cubro su espalda.',
+          si: [{ si: 'un volante rival recibe a la espalda del ENG', hago: 'Salgo a presionarlo sin dejarlo girar.' }] },
+        VD: { propuesta: true, hago: 'Me paro alto, en la línea de volantes, listo para saltar sobre el lateral rival de mi lado.',
           si: [{ si: 'la pelota va al otro lado', hago: 'Me cierro hacia el medio para tapar pases.' }] },
-        VI: { propuesta: true, hago: 'Me paro alto, listo para saltar sobre el lateral rival de mi lado.',
+        VI: { propuesta: true, hago: 'Me paro alto, en la línea de volantes, listo para saltar sobre el lateral rival de mi lado.',
           si: [{ si: 'la pelota llega al lateral', hago: 'Salto a presionarlo; el LI me cubre.' }] },
-        ENG: { propuesta: true, hago: 'Espero en el medio el pase del arquero, cerca del pivote rival.',
-          si: [{ si: 'el arquero juega a un zaguero', hago: 'Salgo en curva, de adentro hacia afuera, para que no pueda cambiar de lado.' }] },
-        DD: { propuesta: true, hago: 'Me abro en la línea del pase al lateral rival. Dejo que el arquero juegue al medio.',
-          si: [{ si: 'la juega al zaguero del otro lado', hago: 'Me cierro hacia el medio para tapar la devolución.' }] },
-        DI: { propuesta: true, hago: 'Me abro en la línea del pase al lateral rival. Dejo que el arquero juegue al medio.',
-          si: [{ si: 'la juega al zaguero de mi lado', hago: 'Sigo cortando el pase al lateral: al zaguero sale el ENG.' }] }
+        ENG: { propuesta: true, hago: 'Estoy en el centro de la línea de volantes, cerca del pivote rival.',
+          si: [{ si: 'el arquero juega a un zaguero', hago: 'Subo al pivote rival y me paro en la línea del pase, para que el zaguero no pueda jugar al medio.' }] },
+        DD: { propuesta: true, hago: 'Espero abierto, en la línea del pase al lateral rival. Dejo que el arquero juegue al zaguero.',
+          si: [{ si: 'juega al zaguero de mi lado', hago: 'Lo presiono en curva, de afuera hacia adentro: con la espalda le tapo el pase al lateral.' },
+               { si: 'juega al zaguero del otro lado', hago: 'Me cierro hacia el medio para tapar el pase de vuelta.' }] },
+        DI: { propuesta: true, hago: 'Espero abierto, en la línea del pase al lateral rival. Dejo que el arquero juegue al zaguero.',
+          si: [{ si: 'juega al zaguero de mi lado', hago: 'Lo presiono en curva, de afuera hacia adentro: con la espalda le tapo el pase al lateral.' },
+               { si: 'juega al zaguero del otro lado', hago: 'Me cierro hacia el medio para tapar el pase de vuelta.' }] }
       }
     },
 
@@ -360,7 +369,7 @@ window.CAI_DATA = {
           pelota: [72, 64],
           propios: {
             ARQ: [50, 14], ZD: [64, 34], ZI: [38, 32], LI: [22, 40], '5': [50, 44], LD: [92, 66],
-            VD: [70, 62], VI: [36, 60], ENG: [52, 72], DD: [62, 82], DI: [42, 82]
+            VD: [70, 62], VI: [36, 60], ENG: [51, 64], DD: [62, 82], DI: [42, 82]
           },
           rivales: [
             [70, 88], [56, 90], [44, 90], [30, 88],
@@ -373,7 +382,7 @@ window.CAI_DATA = {
           titulo: 'Presión tras pérdida: primeros segundos',
           pelota: [75, 68],
           propios: {
-            VD: [71, 65], ENG: [69, 71], DD: [74, 74], '5': [60, 56], LD: [88, 56],
+            VD: [71, 65], ENG: [66, 70], DD: [74, 74], '5': [60, 56], LD: [88, 56],
             ZD: [63, 30], ZI: [39, 28], LI: [24, 36], VI: [44, 58], DI: [46, 78], ARQ: [50, 12]
           },
           rivales: [
@@ -383,7 +392,7 @@ window.CAI_DATA = {
             [50, 97]
           ],
           flechas: [
-            { tipo: 'mov', de: [52, 72], a: 'ENG' },
+            { tipo: 'mov', de: [51, 64], a: 'ENG' },
             { tipo: 'mov', de: [62, 82], a: 'DD' },
             { tipo: 'mov', de: [50, 44], a: '5' },
             { tipo: 'mov', de: [92, 66], a: 'LD' }
@@ -488,7 +497,7 @@ window.CAI_DATA = {
       consigna: 'Tenés la pelota por dentro y el rival está metido atrás. ¿A dónde pasás?',
       base: { fase: 'f3', paso: 1 },
       ideal: { x: 92, y: 72, rx: 6, ry: 8, nombre: 'LD que pasa por afuera' },
-      aceptable: { x: 52, y: 72, rx: 6, ry: 5, nombre: 'ENG por dentro' },
+      aceptable: { x: 51, y: 64, rx: 6, ry: 5, nombre: 'ENG por dentro' },
       explicacion: 'Sin extremos, la amplitud la da el lateral: abrirle es estirar al rival.'
     },
     {
@@ -546,8 +555,8 @@ window.CAI_DATA = {
       titulo: 'Presión alta',
       consigna: 'El arquero rival jugó al zaguero izquierdo. ¿Dónde te parás?',
       base: { fase: 'f5', paso: 2 },
-      zona: { x: 40, y: 88, rx: 6, ry: 5 },
-      explicacion: 'Salís al zaguero desde adentro para que no cambie de lado.'
+      zona: { x: 45, y: 82, rx: 6, ry: 5 },
+      explicacion: 'Al zaguero lo presiona el DI; vos subís al pivote rival y te parás en la línea del pase para que no pueda jugar al medio.'
     },
     {
       id: 'B5', rol: 'DI',
@@ -555,7 +564,7 @@ window.CAI_DATA = {
       consigna: 'El arquero rival tiene la pelota para sacar. ¿Dónde te parás?',
       base: { fase: 'f5', paso: 1 },
       zona: { x: 34, y: 82, rx: 7, ry: 6 },
-      explicacion: 'Abierto, en la línea del pase al lateral: dejás que el arquero juegue al medio, donde lo esperamos.'
+      explicacion: 'Abierto, en la línea del pase al lateral: dejás que el arquero juegue al zaguero y desde ahí lo presionás en curva.'
     }
   ],
 
@@ -564,13 +573,12 @@ window.CAI_DATA = {
    *  alerta: true = se muestra en rojo (algo a cuidar).
    * ------------------------------------------------------------------ */
   comoJugamos: [
-    { titulo: 'Somos muchos por dentro', lineas: [
-      'Jugamos con el 5 y, adelante, una línea de tres volantes: VI, ENG y VD.',
+    { titulo: 'Somos cuatro por dentro', lineas: [
+      'Atrás de los delanteros jugamos con el 5 y una línea de tres volantes: VI, ENG y VD.',
       'El ENG se llama enganche, pero es un volante interno más.',
       'Por dentro somos más que el rival.',
-      'No tenemos extremos.',
-      'El ancho lo dan los laterales.',
-      'Por eso los volantes cubren el espacio que deja el lateral.'
+      'No tenemos extremos: el ancho lo dan los laterales.',
+      'Por eso los volantes de afuera cubren el espacio que deja el lateral.'
     ] },
     { titulo: 'Los laterales no suben juntos', lineas: [
       'Si sube uno, el otro se cierra.',
@@ -578,21 +586,24 @@ window.CAI_DATA = {
       'El 5 se para adelante de esa línea.',
       'Esa es nuestra seguridad si perdemos la pelota.'
     ] },
-    { titulo: 'El volante ayuda al lateral', lineas: [
-      'Un volante puede bajar al lado de los zagueros.',
-      'Así el lateral queda libre para subir.',
-      'Si el lateral no puede subir, el volante se abre.'
+    { titulo: 'La línea de tres se mueve junta', lineas: [
+      'Un volante puede bajar al lado de los zagueros para que suba el lateral.',
+      'Si el lateral no puede subir, el volante se abre.',
+      'Cuando un volante deja su lugar, el ENG se corre para ese lado.',
+      'El volante del otro lado se cierra al medio: siempre hay alguien por dentro.'
     ] },
     { titulo: 'Presión alta', lineas: [
       'Es en el saque del arquero rival.',
-      'Los dos delanteros se abren y tapan el pase a los laterales.',
-      'El enganche sale al zaguero con pelota, en curva, para que no cambie de lado.',
-      'Si pasan a los delanteros, saltan los volantes sobre los laterales.'
+      'Los delanteros esperan abiertos, en la línea del pase a los laterales.',
+      'Si el arquero juega a un zaguero, el delantero de ese lado lo presiona en curva, de afuera hacia adentro.',
+      'El ENG sube al pivote rival. El 5 le cubre la espalda.',
+      'Si la pelota llega al lateral, salta el volante de ese lado.'
     ] },
     { titulo: 'Bloque medio', lineas: [
       'Todo el equipo se corre hacia la pelota.',
       'El volante de ese lado sale al lateral rival.',
-      'Si cambian de frente, nos corremos por el medio y sale el otro volante.'
+      'El ENG ocupa su lugar por dentro y el otro volante se cierra.',
+      'Si cambian de frente, la línea se corre por el medio y sale el otro volante.'
     ] },
     { titulo: 'Bloque bajo', lineas: [
       'Los tres volantes bajan a la altura del 5: dos líneas de cuatro.',
@@ -602,11 +613,12 @@ window.CAI_DATA = {
     { titulo: 'Lo que tenemos que cuidar', alerta: true, lineas: [
       'Al rival le es fácil atacarnos por las bandas.',
       'Lo que más nos lastima es un pase a la espalda del lateral.',
+      'También los costados del 5: si salta la línea de tres, el 5 solo no tapa todo.',
       'Por eso las coberturas de volantes y zagueros son clave.'
     ] },
     { titulo: 'Nuestra fuerza', lineas: [
-      'Como somos muchos por dentro, cuando la perdemos hay varios cerca.',
-      'Eso nos deja presionar enseguida.',
+      'Con el 5 y la línea de tres somos cuatro por dentro.',
+      'Cuando la perdemos hay varios cerca: podemos presionar enseguida.',
       'Los de cerca presionan ya.'
     ] }
   ]
