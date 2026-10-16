@@ -29,6 +29,7 @@
     carriles: store.get('carriles', true) !== false,
     velocidad: store.get('velocidad', 'normal') === 'lenta' ? 'lenta' : 'normal'
   };
+  if (S.rol === 'ENG') setPref('rol', '10'); // el enganche pasó a llamarse 10
   if (S.rol && !D.rolesById[S.rol]) S.rol = null;
 
   function str(v) { return typeof v === 'string' ? v : ''; }
@@ -279,7 +280,7 @@
   }
 
   function rolesPicker(selected, withAll) {
-    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', 'ENG', 'DD', 'DI'].filter(function (r) { return D.rolesById[r]; });
+    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', '10', 'DD', 'DI'].filter(function (r) { return D.rolesById[r]; });
     var html = '<div class="roles" role="group" aria-label="Elegí tu rol">';
     if (withAll) html += '<button class="role-btn' + (!selected ? ' on' : '') + '" data-rol="" aria-pressed="' + !selected + '">Todos</button>';
     html += order.map(function (r) {
@@ -409,7 +410,7 @@
     var j = JUEGOS[k];
     if (!j) { location.hash = '#jugar'; return; }
     var lista = j.lista();
-    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', 'ENG', 'DD', 'DI'];
+    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', '10', 'DD', 'DI'];
     view.innerHTML = head('Juego ' + k + ' · ' + j.nombre, '#jugar', 'Juegos') +
       '<p class="screen-sub">Elegí tu rol. Solo vas a ver escenarios de ese rol.</p>' +
       '<div class="roles big">' + order.map(function (r) {
@@ -642,7 +643,7 @@
     var nRes = Object.keys(resueltos).length;
     function v(n) { return n === null ? '—' : pct(n); }
 
-    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', 'ENG', 'DD', 'DI'];
+    var order = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', '10', 'DD', 'DI'];
     var filas = order.map(function (r) {
       var esc_ = todos.filter(function (e) { return e.rol === r; });
       if (!esc_.length) return '';

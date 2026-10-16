@@ -39,7 +39,7 @@
   };
 
   /* ================= Validación ================= */
-  var ROLES_ESPERADOS = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', 'ENG', 'DD', 'DI'];
+  var ROLES_ESPERADOS = ['ARQ', 'LD', 'ZD', 'ZI', 'LI', '5', 'VD', 'VI', '10', 'DD', 'DI'];
 
   function isNum(n) { return typeof n === 'number' && isFinite(n); }
 
